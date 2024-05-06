@@ -1,0 +1,107 @@
+
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit profile</title>
+  <!-- Add Bootstrap CSS link -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .login-container {
+      max-width: 400px;
+      margin: auto;
+      margin-top: 80px;
+
+    }
+    .card{
+
+        box-shadow:0 0 5px black;
+
+    }
+    .form-control{
+        background-color:#eee;
+    }
+      #bk{
+position:absolute;
+top:15px;
+left:10px;
+color:black;
+font-size:2.4rem;
+
+
+z-index:4;
+text-decoration:none;
+}
+  </style>
+</head>
+<body>
+ <a href="javascript:history.back()" title="Go Back" id="bk">&larr;</a>
+<div class="container login-container">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="text-center">Set profile</h2>
+      <form action="{% url 'editprofile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="form-group">
+          <label for="username">Change username:</label>
+          <input type="text" class="form-control" id="username" name="username" value="{{cuser.user.username}}">
+        </div>
+
+              <div class="form-group">
+          <label for="file">Profile image:</label>
+          <input type="file" class="form-control" id="file" name="image" accept="image/*" >
+        </div>
+
+              <div class="form-group">
+          <label for="about">Your description:</label>
+       <textarea class="form-control" id="about" name="about">{{cuser.about}}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="nickname">Change nickname:</label>
+          <input type="text" class="form-control" id="nickname" name="nickname" value="{{cuser.nickname}}">
+        </div>
+
+              <div class="form-group">
+          <label for="gender">Gender:</label>
+     <select class="form-control" id="gender" name="gender" >
+     <option>male</option>
+     <option>female</option>
+     <option>other</option>
+     </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Save</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+  {% if cuser.gender %}
+    document.getElementById("gender").value = "{{cuser.gender}}";
+    {% else %}
+     document.getElementById("gender").value = "male";
+    {%endif%}
+
+  });
+
+
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Status</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+{% load static %}
+<style>
+    ul{
+
+    }
+    .ic img{
+    max-width:200px;
+    max-height:200px;
+    border-radius:50%;
+    }
+   .ic {
+    text-align: center;
+    background-color:#fff;
+
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.ic i {
+    display: block;
+    margin: 0 auto;
+    font-size:2rem;
+}
+.mn{
+    position:absolute;
+    right:30px;
+}
+ .progress-outer {
+    background: #fff;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 10px 0;
+    box-shadow: 0 0 10px rgba(20, 219, 231, 1);
+  }
+
+  .progress {
+    height: 15px;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 50px;
+    background: #eaedf3;
+  }
+
+  .progress .progress-bar {
+    border-radius: 50px;
+    background: #5BC0DE; /* Set the progress bar color here */
+  }
+
+  .progress-value {
+    position: absolute;
+left:47%;
+margin-top:7px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: black; /* Set the text color here */
+    letter-spacing: 2px;
+  }
+
+.progress-bar.active {
+    animation: reverse progress-bar-stripes 0.40s linear infinite, animate-positive 2s;
+}
+
+@-webkit-keyframes animate-positive {
+    0% { width: 0%; }
+}
+
+@keyframes animate-positive {
+    0% { width: 0%; }
+}
+#x{
+   position:absolute;
+   right:10px;
+}
+.rq{
+    text-align:center;
+}
+.navbar {
+    background-color: transparent;
+    color: black;
+border:none;
+
+
+  }
+  .navbar li{
+
+  padding-right:10px;
+  }
+    .navbar li a{
+color:black;
+
+   margin-left:5px;
+
+  }
+  .navbar li a:hover{
+  border:none;
+  border-bottom:2px solid black;
+color:black;
+
+
+  }
+  .navbar ul{
+
+  box-sizing:border-box;
+  }
+.navbar .nav-item .nav-link.active {
+border:none;
+  color: blue; /* Set your desired text color for the active link */
+  border-bottom:2px solid black;
+}
+#cf{
+
+    }
+</style>
+<div class="container mt-3">
+
+  <!-- Nav tabs with justified layout -->
+  <div class="container-fluid" id="cf">
+  <nav class="navbar navbar-expand-lg  ">
+    <ul class="nav nav-tabs nav-fill flex-nowrap overflow-x-scroll">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#home">Bronze</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu1">Silver</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu2">Gold</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu3">Platinum</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu4">Diamond</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu5">Master</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<style>
+  /* Custom styles for active tabs */
+  .nav-tabs.nav-fill .nav-item.active .nav-link {
+    background-color: #your-color; /* Set your desired background color */
+    color: #your-text-color; /* Set your desired text color */
+    border-color: #your-border-color; /* Set your desired border color */
+  }
+
+  /* Apply overflow to the container */
+  .overflow-x-scroll {
+    overflow-x: auto;
+    overflow-y:hidden;
+  }
+</style>
+
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+
+      <div class="ic">
+        <img src="{% static 'Blog/img/bronze.png' %}">
+        <h4>Bronze</h4>
+      </div>
+
+    </div>
+
+    <div id="menu1" class="container tab-pane fade"><br>
+  <div class="ic">
+         <img src="{% static 'Blog/img/silver.png' %}">
+    <h4>Silver</h4>
+  </div>
+  <div class="progress-outer">
+    <div class="progress">
+        {% if spercent >= 100 %}
+      <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:100%; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);"></div>
+ <div class="progress-value">100%</div>
+        {% else %}
+        <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:{{spercent}}%; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);"></div>
+ <div class="progress-value">{{spercent}}%</div>
+        {% endif %}
+    </div>
+
+  </div>
+
+  0<span class="mn">100xp</span>
+  <br>
+        {% if spercent >= 100 %}
+         <p class="rq">you reached</p>
+        {% else %}
+        <p class="rq">you required {{sreq}}xp to unlock silver</p>
+        {% endif %}
+</div>
+
+<div id="menu2" class="container tab-pane fade"><br>
+  <div class="ic">
+        <img src="{% static 'Blog/img/gold.png' %}">
+    <h4>Gold</h4>
+  </div>
+  <div class="progress-outer">
+    <div class="progress">
+        {% if gpercent >= 100 %}
+      <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:100%; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);"></div>
+ <div class="progress-value">100%</div>
+        {% else %}
+        <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:{{gpercent}}%; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);"></div>
+ <div class="progress-value">{{gpercent}}%</div>
+        {% endif %}
+    </div>
+  </div>
+ 0<span class="mn">400xp</span>
+    <br>
+    {% if gpercent >= 100 %}
+         <p class="rq">you reached</p>
+        {% else %}
+        <p class="rq">you required {{greq}}xp to unlock gold</p>
+        {% endif %}
+</div>
+
+<div id="menu3" class="container tab-pane fade"><br>
+  <div class="ic">
+         <img src="{% static 'Blog/img/platin.png' %}">
+    <h4>Platin</h4>
+  </div>
+  <div class="progress-outer">
+    <div class="progress">
+         {% if ppercent >= 100 %}
+      <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:100%; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);"></div>
+ <div class="progress-value">100%</div>
+        {% else %}
+        <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:{{ppercent}}%; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);"></div>
+ <div class="progress-value">{{ppercent}}%</div>
+        {% endif %}
+    </div>
+  </div>
+  0<span class="mn">1000xp</span>
+    <br>
+    {% if ppercent >= 100 %}
+         <p class="rq">you reached</p>
+        {% else %}
+        <p class="rq">you required {{preq}}xp to unlock platin</p>
+        {% endif %}
+</div>
+
+<div id="menu4" class="container tab-pane fade"><br>
+  <div class="ic">
+       <img src="{% static 'Blog/img/diamond.png' %}">
+    <h4>Diamond</h4>
+  </div>
+  <div class="progress-outer">
+    <div class="progress">
+        {% if dpercent >= 100 %}
+      <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:100%; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);"></div>
+ <div class="progress-value">100%</div>
+        {% else %}
+        <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:{{dpercent}}%; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);"></div>
+ <div class="progress-value">{{dpercent}}%</div>
+        {% endif %}
+    </div>
+  </div>
+  0<span class="mn">3000xp</span>
+    <br>
+    {% if dpercent >= 100 %}
+         <p class="rq">you reached</p>
+        {% else %}
+        <p class="rq">you required {{dreq}}xp to unlock diamond</p>
+        {% endif %}
+</div>
+<div id="menu5" class="container tab-pane fade"><br>
+
+      <div class="ic">
+            <img src="{% static 'Blog/img/master.png' %}">
+        <h4>Master</h4>
+      </div>
+    <br>
+      <h4 style="text-align:center;">Requirements</h4>
+   <ul class="list-group">
+    <li class="list-group-item">Reach followers<span id="x">{% if followers_count < 200 %}{{followers_count}}/200{% else %}completed{% endif %}</span> </li>
+       <li class="list-group-item">Add posts <span id="x">{% if total_posts < 40 %}{{total_posts}}/40{% else %}completed{% endif %}</span></li>
+  <li class="list-group-item">got total views<span id="x">{% if total_views < 500 %}{{total_views}}/500{% else %}completed{% endif %}</span> </li>
+
+  </ul>
+
+    </div>
+</div>
+
+ <hr> <br>
+<h4 style="text-align:center;">Boost your xp by</h4>
+ <ul class="list-group">
+    <li class="list-group-item">Add Post <span id="x">30xp</span></li>
+       <li class="list-group-item">Getting follower <span id="x">20xp</span></li>
+  <li class="list-group-item">Getting comment <span id="x">5xp</span></li>
+    <li class="list-group-item">Commenting on a post <span id="x">5xp</span></li>
+   <li class="list-group-item">getting views <span id="x">2xp</span></li>
+  </ul>
+  <br>
+  <h4 style="text-align:center;">Super missions</h4>
+   <ul class="list-group">
+
+
+    <li class="list-group-item">posting 10 posts <span id="x">{% if tenpost %}completed{% else %}{{total_posts}}/100xp{% endif %}</span></li>
+       <li class="list-group-item">reach 10 followers <span id="x">{% if tenfollower %}completed{% else %}{{followers_count}}/100xp{% endif %}</span></li>
+  <li class="list-group-item">got 100 total views <span id="x">{% if hunviews %}completed{% else %}{{total_views}}/100xp{% endif %}</span></li>
+    <li class="list-group-item">posting 20 posts <span id="x">{% if twentypost %}completed{% else %}{{total_posts}}/200xp{% endif %}</span></li>
+       <li class="list-group-item">got total 200 views <span id="x">{% if twohunviews %}completed{% else %}{{total_views}}/200xp{% endif %}</span></li>
+   <li class="list-group-item">reach 50 followers <span id="x">{% if fivtyfollower %}completed{% else %}{{followers_count}}/300xp{% endif %}</span></li>
+
+  </ul>
+
+</div>
+<br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+

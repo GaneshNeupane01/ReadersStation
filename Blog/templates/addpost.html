@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}addpost{% endblock %}
+{% block n %}
+{% endblock %}
+{% block content %}
+
+    {%load static%}
+    <style>
+        /* Add your custom CSS styling here */
+        /* For example: */
+        #adpost {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            margin-bottom:80px;
+            margin-top:-40px;
+        }
+
+        #cnt {
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        #abtn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #abtn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Add some additional styles for responsiveness */
+        @media (max-width: 768px) {
+            #cnt {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="adpost">
+    <div class="container" id="cnt">
+        <h2>Post Submission</h2>
+        <form method="post" enctype="multipart/form-data" action="{% url 'addpost' %}">
+            {% csrf_token %}
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="literature">Literature</option>
+                <option value="science">Science</option>
+                <option value="memes">Memes</option>
+                <option value="technology">Technology</option>
+                <option value="history">History</option>
+                <option value="mythology">Mythology</option>
+                <option value="games_and_sports">Games and Sports</option>
+                <option value="art_and_culture">Art and Culture</option>
+                <option value="education_and_learning">Education and Learning</option>
+                <option value="food_and_travel">Food and Travel</option>
+                <option value="others">Others</option> <!-- Fixed typo in "Others" -->
+            </select>
+
+            <label for="content" id="l">Content:</label>
+            <textarea id="content" name="content" rows="6" ></textarea>
+
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*">
+<br><br>
+            <button type="submit" id="abtn">Publish</button>
+        </form>
+    </div>
+    </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+
+    let dh = document.getElementById("content");
+    let l = document.getElementById("l");
+    let c = document.getElementById("category");
+
+
+
+    // Add an event listener to dynamically hide/show the div when the user changes the gender
+    c.addEventListener('change', function() {
+        if (c.value === 'memes') {
+            dh.style.display = "none";
+             l.style.display = "none";
+        } else {
+            dh.style.display = "block";
+              l.style.display = "block"; // or "initial" depending on your layout
+        }
+    });
+  });
+</script>
+
+{% endblock %}
+{% block post %}
+{% endblock %}
+{% block footer %}
+{% endblock %}

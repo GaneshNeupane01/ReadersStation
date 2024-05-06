@@ -1,0 +1,344 @@
+
+<head><!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leaderboard</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <!-- Include Material Design for Bootstrap (MDB) CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+</head>
+
+<body>
+{% load static %}
+    <style>
+html *{
+    -webkit-font-smoothing: antialiased;
+}
+body{
+background-color:#00001a;
+}
+.card-body{
+box-shadow: 0 0 4px #0ef;
+border-radius:10px;
+}
+h3{
+    font-size: 25px !important;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    line-height: 1.4em !important;
+    color:white;
+}
+
+#uname{
+margin-left:-52px;
+margin-top:-15px;
+color:black;
+font-size: 115%;
+font-weight:410;
+
+}
+
+ small {
+    font-size: 88%;
+    color: #00a;
+    font-weight: 400;
+}
+
+.container .title{
+    color: #3c4858;
+    text-decoration: none;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    min-height: 32px;
+}
+
+.container .title h3{
+    font-size: 25px;
+    font-weight: 300;
+}
+
+div.card {
+    border: 0;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border-radius: 6px;
+    color: rgba(0,0,0,.87);
+    background: #fff;
+    width: 100%;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+div.card.card-plain {
+    background: #fff;
+    box-shadow: none;
+}
+div.card .card-header {
+    border-radius: 3px;
+    padding: 1rem 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: -30px;
+    border: 0;
+    background: linear-gradient(60deg,#eee,#bdbdbd);
+}
+
+.card-plain .card-header:not(.card-avatar) {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.div.card .card-body{
+    padding: 15px 30px;
+}
+
+div.card .card-header-primary {
+    background: linear-gradient(60deg,#ab47bc,#7b1fa2);
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,.2), 0 13px 24px -11px rgba(156,39,176,.6);
+}
+
+div.card .card-header-danger {
+    background: linear-gradient(60deg,#ef5350,#d32f2f);
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,.2), 0 13px 24px -11px rgba(244,67,54,.6);
+}
+
+
+.card-nav-tabs .card-header {
+    margin-top: -30px!important;
+}
+
+.card .card-header .nav-tabs {
+    padding: 0;
+}
+
+.nav-tabs {
+    border: 0;
+    border-radius: 3px;
+    padding: 0 15px;
+
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+
+}
+
+.nav-tabs .nav-item {
+    margin-bottom: -1px;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+    background-color: hsla(0,0%,100%,.2);
+    transition: background-color .3s .2s;
+}
+
+.nav-tabs .nav-item .nav-link{
+    border: 0!important;
+    color: #fff!important;
+    font-weight: 500;
+}
+
+.nav-tabs .nav-item .nav-link {
+    color: #fff;
+    border: 0;
+    margin: 0;
+    border-radius: 3px;
+    line-height: 24px;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 10px 15px;
+    background-color: transparent;
+    transition: background-color .3s 0s;
+}
+
+.nav-link{
+    display: block;
+}
+
+.nav-tabs .nav-item .material-icons {
+    margin: -1px 5px 0 0;
+    vertical-align: middle;
+}
+
+.nav .nav-item {
+    position: relative;
+}
+.tab-content{
+    margin-top:20px;
+    height:65vh;
+    overflow-x:hidden;
+    overflow-y:scroll;
+}
+      .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-image {
+
+            border: 2px solid #007bff; /* Blue border color */
+        }
+
+        .list-group-item {
+           /* border:1px solid black;  Blue border color */
+            margin-bottom: 0px;
+           /* background-color:#333;*/
+            background-color:#eff;
+
+        }
+.user__imagep {
+  border-radius: 50%;
+  width:42px;
+  height:42px;
+}
+        .user__badgep {
+  border-radius: 50%;
+  width:16px;
+  height:16px;
+  margin-top:22px;
+  margin-left:-45px;
+  border:2px solid white;
+  position:absolute;
+}
+        #fc{
+        position:absolute;
+        bottom:20px;
+        left:70px;
+        }
+         ul {
+      list-style-type: none; /* Remove default list styles */
+      padding: 0; /* Remove default padding */
+    }
+         li {
+      margin-top: -10px;
+
+    }
+        #bk{
+position:absolute;
+top:7px;
+left:20px;
+color:white;
+font-size:2rem;
+
+
+z-index:4;
+text-decoration:none;
+}
+        .badge{
+        padding:6px;
+        font-size:80%;
+        background:rgb(0,0,230);
+        }
+        </style>
+<a href="javascript:history.back()" title="Go Back" id="bk">&larr;</a>
+<br>
+    <div class="container">
+
+
+
+            <div class="col-md-12">
+                <h3><small style="color:#ddd;">Leaderboard</small></h3>
+
+                <!-- Tabs on Plain Card -->
+                <div class="card card-nav-tabs card-plain">
+                    <div class="card-header card-header-danger">
+                        <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#home" data-toggle="tab">By xp</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#updates" data-toggle="tab">Most Followed</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        {% if request.user.is_authenticated %}
+                                        <a class="nav-link" href="{% url 'status' %}" >Boost Xp</a>
+                                        {% else %}
+                                        <a class="nav-link" href="{% url 'login' %}" >Boost Xp</a>
+                                        {% endif %}
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div><div class="card-body ">
+                        <div class="tab-content text-center">
+                            <div class="tab-pane active" id="home">
+            <ul class="list-group">
+                {% for u in onxp %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="user-info d-flex align-items-center">
+                    <a href="{% url 'userprofile' u.user.id %}">
+                        {% if u.image %}
+                    <img src="/media/{{ u.image }}"  class="user__imagep" width="50">
+                      {% else %}
+                    <img src="{% static 'Blog/img/default.png' %}"  alt="user__image" class="user__imagep" width="50">
+                    {% endif %}
+
+                        {% if u.badge %}
+                    <img src="{% static 'Blog/img/'|add:u.badge|add:'.png' %}" class="user__badgep">
+                    {% endif %}</a>
+       </a>
+
+                    <span id="uname">{{u.user.username}}</span>
+                    <span id="fc"><small>{{u.fcount}} followers</small></span>
+                </div>
+                <span class="badge badge-primary badge-pill">{{u.xp}}xp</span>
+            </li>
+                {% endfor %}
+
+        </ul>
+                            </div>
+
+
+                            <div class="tab-pane" id="updates">
+                    <ul class="list-group">
+           {% for u in onf %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="user-info d-flex align-items-center">
+                    <a href="{% url 'userprofile' u.user.id %}">
+                     {% if u.image %}
+                    <img src="/media/{{ u.image }}"  class="user__imagep" width="50">
+                      {% else %}
+                    <img src="{% static 'Blog/img/default.png' %}"  alt="user__image" class="user__imagep" width="50">
+                    {% endif %}
+                        {% if u.badge %}
+                    <img src="{% static 'Blog/img/'|add:u.badge|add:'.png' %}" class="user__badgep">
+                    {% endif %}</a>
+       </a>
+
+                    <span id="uname">{{u.user.username}}</span>
+                     <span id="fc"><small>{{u.fcount}} followers</small></span>
+
+                </div>
+                <span class="badge badge-primary badge-pill">{{u.xp}}xp</span>
+            </li>
+                {% endfor %}
+        </ul>
+                            </div>
+
+                        </div>
+                    </div></div>
+                <!-- End Tabs on plain Card -->
+
+    </div>
+
+
+</body>
+</html>

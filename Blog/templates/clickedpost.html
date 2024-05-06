@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %} continue reading{% endblock %}
+
+{% block n %}
+
+{% endblock %}
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+
+
+    <style>
+        .post {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+            color:black;
+        }
+        .post:hover {
+            transform: scale(1.01);
+        }
+        .post-image {
+            max-width: 400px;
+            height: 400px;
+        }
+.user__imagep {
+  border-radius: 50%;
+  width:40px;
+  height:40px;
+}
+        .read-more {
+            text-decoration: underline;
+            cursor: pointer;
+            color: #007BFF;
+        }
+        #cname{
+        font-weight:bold;
+        }
+        #comment{
+        margin-left:45px;
+
+        }
+        body{
+
+        }
+    </style>
+
+    <div class="container">
+
+            <!-- Post 1 -->
+
+
+                <div class="post">
+                     {% if post.image %}
+            <img src="/media/{{ post.image }}" class="card-img-top" alt="image">
+{% else %}
+            <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card-img-top" >
+            {% endif %}
+
+                    <h3>{{post.title}}</h3>
+ {% if post.category != 'memes' %}
+
+                    <p>By Author {{post.author}}</p>
+
+
+
+                    <p>Category: {{post.category}} </p>
+                    {%endif%}
+                    <p>Posted on: {{post.post_time}}</p>
+ {% if post.category != 'memes' %}
+                    <p class="post-content">
+                        {{ post.content }}
+                    </p>
+{% endif %}
+
+            </div>
+{% if request.user.is_authenticated %}
+<h2>Leave a Comment</h2>
+    <form   method="post" action="{% url 'clickedpost' post.pk %}" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                     <input type="text"  name="comment" >
+         <button type="submit" class="submitBtn">Post</button>
+    </form>
+        {% else %}
+        <br><br>
+        <span ><a href="{% url 'login' %}" style="color:blue;">Login</a> to add comment </span><br>
+        {% endif %}
+        <br>
+        <h3>{{post.comment_count}} Comments</h3><br>
+        {% for cmt in comments %}
+
+         <a href="{% url 'userprofile' cmt.userinfo.user.id %}">
+             {% if cmt.userinfo.image %}
+                    <img src="/media/{{ cmt.userinfo.image }}" alt="user__image" class="user__imagep">
+        {% else %}
+        <img src="{% static 'Blog/img/default.png' %}"  alt="user__image" class="user__imagep">
+        {% endif %}</a>
+        <small id="cname">{{cmt.userinfo.user.username}}</small>&nbsp&nbsp<small>{{cmt.comment_time|custom_timesince}}</small>
+       <p id="comment">{{cmt.comment}}</p>
+         {% empty %}
+    <p>No comment found.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Your content goes here -->
+
+
+
+{% endblock %}
+{% block post %}
+{% endblock %}

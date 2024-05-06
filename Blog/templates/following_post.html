@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}following - Site{% endblock %}
+{% block frm %}
+ <form class="form-inline ml-auto" method="post" action="{% url 'literaturesearch' %}">
+      {% csrf_token %}
+         <input class="form-control mr-2" type="text" placeholder="Search Literature" aria-label="Search" name="search">
+{% endblock %}
+     {% block n %}
+          <br><br>
+<h4 style="margin-left:10%;">My following posts</h4>
+{% endblock %}
+{% block content %}
+
+{% endblock %}

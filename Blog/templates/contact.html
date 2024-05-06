@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %} contact{% endblock %}
+
+
+
+
+{% block n %}
+
+{% endblock %}
+
+
+
+
+
+{% block content %}
+
+
+
+    <style>
+        /* Custom CSS for the form */
+        .contact-form {
+            max-width: 400px;
+            margin: 0 auto;
+
+        }
+        .box{
+            border:1px solid black;
+            box-shadow:0 0px 14px black;
+        }
+        input[type="text"],input[type="email"]{
+            box-shadow:0 0px 4px black;
+            border-radius:10px;
+        }
+        textarea{
+            box-shadow:0 0px 4px black;
+            border-radius:10px;
+        }
+    </style>
+
+    <div class="container mt-5">
+        <div class="box">
+            <br>
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+
+            <form method="post" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="senderName">Your Name</label>
+                    <input type="text" class="form-control" id="senderName" name="uname" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="senderEmail">Your Email</label>
+                    <input type="email" name="uemail" class="form-control" id="senderEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailSubject">Subject</label>
+                    <input type="text" name="subject" class="form-control" id="emailSubject" placeholder="Enter subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea class="form-control" name="content" id="message" rows="5" placeholder="Your message" required></textarea>
+                </div>
+                {% if request.user.is_authenticated %}
+                <button type="submit" class="btn btn-primary">Send</button>
+                {% else %}
+                <a href="{% url 'login' %}" style="background:blue;padding:3px;color:white;text-decoration:none;">Send</a>
+                {% endif %}
+
+            </form>
+        </div>
+        <br>
+         </div>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js -->
+
+
+
+
+{% endblock %}
+{% block page %}
+{% endblock %}
+{% block post %}
+{% endblock %}

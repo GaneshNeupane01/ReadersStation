@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+
+{% block title %} User Profile{% endblock %}
+{% block topnav %}
+{% endblock %}
+{% block n %}
+
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<a href="javascript:history.back()" title="Go Back" id="bk">&larr;</a>
+
+    <div class="profile-header">
+        <!-- Gradient background layer -->
+        <div class="gradient-layer"></div>
+
+        <div class="container mt-5">
+            <div class="profile-card" id="mt">
+
+                <div class="profile-image">
+
+                    {% if ouserinfo.image %}
+
+                  <a href="/media/{{ ouserinfo.image }}" > <img src="/media/{{ ouserinfo.image }}"></a>
+              {% else %}
+                     <img src="{% static 'Blog/img/default.png' %}" >
+
+                    {% endif %}
+                </div>
+
+
+                <div class="user-details">
+                    <h2 class="user-name">
+                        <div class="typing-container">
+                            <span id="typing-name">{{ouserinfo.user.username}}{% if ouserinfo.nickname %}({{ouserinfo.nickname}}){% endif %} </span>
+
+                        </div>
+                    </h2>
+                                  <span id="fu">
+                            {% if ouserinfo.user != request.user %}
+    {% if is_following %}
+        <a href="{% url 'unfollow' ouserinfo.user.id %}">Unfollow</a>
+    {% else %}
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'follow' ouserinfo.user.id %}">Follow</a>
+    {% else %}
+    <a href="{% url 'login' %}">Follow</a>
+    {% endif %}
+    {% endif %}
+{% endif %}</span>
+                <br><br>
+<div class="status">
+  <h4> status: <img src="{% static 'Blog/img/'|add:ouserinfo.badge|add:'.png' %}"></h4>
+<h4>total xp: {{ouserinfo.xp}}</h4>
+
+                </div>
+                    <br>
+<div class="pcon">
+<br>
+
+
+                    <p class="user-email">Email: {{ouserinfo.user.email}}</p>
+                    <p class="user-description">{{ouserinfo.about}}</p>
+                    <div class="profile-stats">
+                        <div class="followers">
+                            <i class="fas fa-users"></i>
+                            <p>Followers</p>
+                            <p class="stat-number">{{followers_count}}</p>
+                        </div>
+                        <div class="followers">
+                            <i class="fas fa-users"></i>
+                            <p>Following</p>
+                            <p class="stat-number">{{following_count}}</p>
+                        </div>
+                        <div class="post">
+                            <i class="fas fa-blog"></i>
+                            <p>Posts</p>
+                            <p class="stat-number" >{{total_posts}}</p>
+                        </div>
+                        <div class="views">
+                            <i class="fas fa-eye"></i>
+                            <p>Views</p>
+                            <p class="stat-number">{{total_views}}</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+            <div class="past-posts">
+                <h3>Past Posts</h3>
+                <!-- Add your past posts here with appropriate styling -->
+            </div>
+        </div>
+    </div>
+    <style>
+        /* Add custom styles to improve the appearance of the user profile */
+
+
+#bk{
+position:absolute;
+top:20px;
+left:20px;
+color:white;
+font-size:2rem;
+
+
+z-index:4;
+text-decoration:none;
+}
+
+#fu{
+font-size:16px;
+}
+.profile-image{
+border-radius: 20px;
+    background: linear-gradient(rgb(27, 0, 80),rgb(17, 1, 74), rgba(255, 4, 54, 0), rgba(255, 4, 54, 0));
+
+  box-shadow:0 -10px 20px rgb(21, 0, 255);
+}
+.status img{
+width:60px;
+height:60px;
+border-radius:50%;
+}
+.typing-container {
+    display: inline-block;
+    width: 300px; /* Adjust the width as needed */
+    white-space: wrap;
+    overflow: hidden;
+}
+.pcon{
+    border-radius: 20px;
+    box-shadow:0 10px 20px rgb(21, 0, 255);
+}
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    margin-top: 40px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+}
+.status{
+border-radius: 20px;
+    background: linear-gradient(rgb(27, 0, 80),rgb(17, 1, 74), rgba(255, 4, 54, 0), rgba(255, 4, 54, 0));
+
+  box-shadow:0 -10px 20px rgb(21, 0, 255);
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.edit-profile a {
+    text-decoration: none;
+    background: linear-gradient(45deg,rgb(211, 0, 0), rgb(28, 1, 160));
+    color: #fff;
+    box-shadow: 0 0 5px white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-top: 10px;
+}
+
+.edit-profile a:hover {
+    background: linear-gradient( rgba(46, 4, 255, 1),rgba(255, 0, 191, 1));
+}
+
+.user-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    color:rgb(129, 251, 237);
+}
+
+.user-email,.user-nickname,.user-gender {
+    font-size: 18px;
+    color: rgb(247, 255, 255);
+        white-space:pre-wrap;
+word-wrap:break-word;
+   margin-left:5px;
+    margin-right:5px;
+}
+
+.user-description {
+    font-size: 16px;
+    margin-top: 20px;
+    white-space:pre-wrap;
+word-wrap:break-word;
+   margin-left:5px;
+    margin-right:5px;
+    color:rgb(241, 244, 244);
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    color:rgb(255, 255, 255);
+     margin:20px;
+}
+
+.profile-stats .followers,
+.profile-stats .post,
+.profile-stats .views {
+    text-align: center;
+    color: #fff;
+}
+
+.profile-stats i {
+    font-size: 24px;
+    color: #00ffea;
+    margin-bottom: 5px;
+}
+
+.profile-stats p {
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.logout-button {
+    background-color: #ff4500;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+    box-shadow: 0 0 5px #0ef;
+}
+
+.logout-button:hover {
+    background-color: #e63500;
+}
+
+.past-posts {
+    margin-top: 30px;
+}
+
+
+/* Add custom styles to improve the appearance of the user profile */
+
+
+
+.profile-header {
+
+    position: relative;
+    background: linear-gradient(rgb(0, 1, 26), rgb(0, 1, 27));
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.profile-card {
+
+    background-color: linear-gradient(rgb(2, 0, 26), rgb(10, 0, 22));
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+#mt{
+margin-top:-20px;
+}
+/* Other styles remain the same */
+
+
+/* Add more custom styles and effects as needed */
+
+    </style>
+
+
+{% endblock %}
+{% block footer %}
+{% endblock %}

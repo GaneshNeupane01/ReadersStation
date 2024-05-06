@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Education and Learning - Site{% endblock %}
+{% block frm %}
+ <form class="form-inline ml-auto" method="post" action="{% url 'educationandlearningsearch' %}">
+      {% csrf_token %}
+         <input class="form-control mr-2" type="text" placeholder="Search Education and Learning" aria-label="Search" name="search">
+{% endblock %}
+{% block n %}
+    <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+   max-height: 500px; /* Set the desired height */
+    width: 100%; /* Maintain aspect ratio */
+    margin: 0 auto; /* Center-align images */
+  }
+
+#demo{
+        max-height:600px;
+        overflow:hidden;
+        }
+        #captionText{
+        font-weight:bold;
+        text-shadow: 0 0 5px red;
+
+        }
+  .carousel-caption {
+
+    color: #fff; /* Set the text color to white */
+    text-align: center; /* Center-align text */
+  }
+      #lgn{
+        border-radius:15px;
+        padding:7px 20px;
+        font-size:16px;
+
+        color:#111;
+        font-weight:bold;
+        text-shadow:0 0 10px white;
+        background-image:linear-gradient(to right,#25aae1,#40e495,#30dd8a,#2bb673);
+        box-shadow:0 0px 15px 0 rgba(49,196,190,0.75);
+        }
+
+  </style>
+
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+     <div class="carousel-caption text-center">
+    <h3 id="captionHeader">Education and Learning</h3>
+    <p id="captionText" class="text-wrap"></p>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'Blog/img/ueducation1.png' %}" >
+    </div>
+
+    <div class="carousel-item">
+      <img src="{% static 'Blog/img/ueducation2.jpg' %}" >
+    </div>
+          <div class="carousel-item">
+      <img src="{% static 'Blog/img/ueducation3.png' %}" >
+    </div>
+  </div>
+
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const captionHeader = document.getElementById("captionHeader");
+  const captionText = document.getElementById("captionText");
+  const texts = [
+"Education is the most powerful weapon which you can use to change the world. - Nelson Mandela",
+"The roots of education are bitter, but the fruit is sweet. - Aristotle",
+"The mind is not a vessel to be filled, but a fire to be kindled. - Plutarch",
+"Education is not preparation for life; education is life itself. - John Dewey",
+  ];
+  let index = 0;
+
+  function typeText() {
+    if (index < texts.length) {
+      captionText.innerHTML = "";
+
+ {% if request.user.is_authenticated %}
+      captionHeader.innerHTML = "Education and Learning";
+      {% else %}
+      captionHeader.innerHTML = "<a href='{% url 'login' %}' id='lgn'>Login</a>";
+      {%endif%}
+      let textToType = texts[index];
+      let charIndex = 0;
+
+      function typeCharacter() {
+        if (charIndex < textToType.length) {
+          captionText.innerHTML += textToType.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeCharacter, 100); // Adjust the typing speed here
+        } else {
+          index++;
+          setTimeout(typeText, 2000); // Adjust the delay between sentences here
+        }
+      }
+
+      typeCharacter();
+    } else {
+      index = 0;
+      setTimeout(typeText, 2000); // Loop back to the first sentence
+    }
+  }
+
+  typeText();
+});
+</script>
+
+
+    {% endblock %}
+{% block content %}
+
+
+
+{% endblock %}

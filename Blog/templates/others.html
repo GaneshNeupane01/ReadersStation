@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Others - Site{% endblock %}
+{% block frm %}
+ <form class="form-inline ml-auto" method="post" action="{% url 'otherssearch' %}">
+      {% csrf_token %}
+         <input class="form-control mr-2" type="text" placeholder="Search Others" aria-label="Search" name="search">
+{% endblock %}
+
+{% block content %}
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,456 @@
+
+{% extends "base.html" %}
+
+{% block title %}favorite Posts{% endblock %}
+{% block n %}
+     <br><br>
+<h4 style="margin-left:10%;">My bookmarked posts</h4>
+{% endblock %}
+{% block content %}
+
+	{% load static %}
+ {% load custom_filters %}
+
+
+
+<style>
+
+.share-button{
+position:absolute;
+margin-top:-33px;
+margin-left:200px;
+width:20px;
+background:transparent;
+border:none;
+cursor:pointer;
+
+}
+.share-menu a{
+color:black;
+font-size:24px;
+}
+.fbtn{
+  background: transparent;
+border:none;
+  cursor: pointer;
+  margin-left:250px;
+font-size:24px;
+width:0;
+height:0;
+}
+.fbtn i{
+position:absolute;
+margin-top:-18px;
+}
+#fav{
+margin-top:-30px;
+
+}
+</style>
+    <style>
+
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+*,
+*::before,
+*::after {
+
+  padding: 0;
+  margin: 0;
+}
+
+    .read-more-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #FF6B6B, #6B47E0);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+
+        .read-more-button::before {
+            content: '\2192'; /* Right arrow Unicode character */
+            display: inline-block;
+            margin-right: 10px;
+            transform: skew(-20deg);
+            transition: transform 0.3s;
+        }
+
+        .read-more-button:hover {
+            background: linear-gradient(45deg, #6B47E0, #FF6B6B);
+        }
+
+        .read-more-button:hover::before {
+            transform: skew(-20deg) translateX(10px);
+        }
+  .posts p {
+   max-width:1200px;
+   overflow:hidden ;
+           height:40px;
+
+        }
+body {
+  font-family: "Quicksand", sans-serif;
+
+  height: 100vh;
+  background: #7f7fd5;
+  background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+}
+.gridpart{
+display:grid;
+  place-items: center;
+    box-sizing: border-box;
+}
+.containerp{
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin-block: 2rem;
+  gap: 4rem;
+}
+.card__headerp img {
+  max-width: 1200px;
+  height:200px;
+  display: block;
+  object-fit: cover;
+}
+
+.cardp {
+  display: flex;
+  flex-direction: column;
+  width: clamp(20rem, calc(20rem + 2vw), 22rem);
+  overflow: hidden;
+  box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  background: #ECE9E6;
+background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+
+}
+
+
+
+.card__bodyp {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+
+.tag {
+  align-self: flex-start;
+  padding: .25em .75em;
+  border-radius: 1em;
+  font-size: .75rem;
+}
+
+.tag + .tag {
+  margin-left: .5em;
+}
+
+.tag-blue {
+  background: #56CCF2;
+background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+  color: #fafafa;
+}
+
+.tag-brown {
+  background: #D1913C;
+background: linear-gradient(to bottom, #FFD194, #D1913C);
+  color: #fafafa;
+}
+
+.tag-red {
+  background: #cb2d3e;
+background: linear-gradient(to bottom, #ef473a, #cb2d3e);
+  color: #fafafa;
+}
+
+.card__bodyp h4 {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+.card__footerp{
+  display: flex;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.userp {
+  display: flex;
+  gap: .5rem;
+}
+
+.user__imagep {
+  border-radius: 50%;
+  width:40px;
+  height:40px;
+}
+.user__badgep {
+  border-radius: 50%;
+  width:16px;
+  height:16px;
+  margin-top:22px;
+  margin-left:-13px;
+  border:2px solid white;
+  position:absolute;
+}
+
+.user__infop > small {
+  color: #666;
+
+}
+
+
+
+    </style>
+<div class="gridpart">
+
+<div class="containerp" id="fd">
+    <!-- Post 1 -->
+    {% for post in posts %}
+
+
+
+
+
+
+
+    <div class="cardp">
+        <div class="card__headerp">
+            {% if post.post.image %}
+            <img src="/media/{{ post.post.image }}"  class="card__image" width="600">
+            {% else %}
+            <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card__image" width="600">
+            {% endif %}
+        </div>
+        <div class="card__bodyp">
+
+            <span class="tag tag-blue">{{post.post.category}}</span>
+
+            {% if request.user.is_authenticated %}
+<form id="fav">
+                {% csrf_token %}
+                <input type="hidden" value="{{post.post.pk}}" name="post_id">
+                {% if post.post.pk in bposts %}
+                 <span class="fpost">
+                <button type="submit" class="fbtn" aria-label="Like"><i class="fas fa-heart" style="color:red;" id="hi"></i></button></span>
+                {% else %}
+                <span class="fpost">
+                <button type="submit" class="fbtn"><i class="fas fa-heart" style="color:#c0c0c0;" id="hi"></i></button></span>
+                {% endif %}
+            </form>
+            {% else %}
+            <form id="fav">
+
+                <span class="fpost">
+                <button  class="fbtn"><i class="fa fa-heart" style="color:#c0c0c0;" id="hi"></i></button></span>
+
+            </form>
+            {% endif %}
+
+<span class="spost">
+    <!-- Your post content -->
+   <span class="share-button"><i class="fas fa-share" style="font-size: 24px; color: #aaa;"></i></span>
+    <span class="share-menu" style="display: none;">
+
+
+<a href="https://www.facebook.com/sharer/sharer.php?u=/clickedpost/{{ post.post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-facebook"></i>
+</a>
+&nbsp
+<!-- WhatsApp -->
+<a href="https://wa.me/?text=/clickedpost/{{ post.post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+&nbsp
+<!-- Instagram -->
+
+
+<!-- Twitter -->
+<a href="https://twitter.com/intent/tweet?url=/clickedpost/{{ post.post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-twitter"></i>
+</a>
+&nbsp
+<!-- Messenger -->
+<a href="https://www.messenger.com/share.php?u=/clickedpost/{{ post.post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-facebook-messenger"></i>
+</a>
+        &nbsp
+        <!-- Add this button along with the other sharing buttons -->
+
+
+    <i class="fas fa-copy" style="font-size: 24px; color: #aaa;" data-post-id="{{ post.post.pk }}"></i>
+
+
+
+
+    </span>
+</span>
+
+
+            <h4>{{post.post.title}}</h4>
+
+
+
+            <a href="{% url 'clickedpost' post.post.pk %}"> <button class="read-more-button">Read More</button></a>
+        </div>
+        <div class="card__footerp">
+            <div class="userp">
+                <a href="{% url 'userprofile' post.post.author.id %}">
+                    {% if post.post.author_details.image %}
+                    <img src="/media/{{ post.post.author_details.image }}" alt="user__image" class="user__imagep">
+                    {% else %}
+                    <img src="{% static 'Blog/img/default.png' %}" class="user__imagep">
+                    {% endif %}
+                    {% if post.post.author_details.badge %}
+                    <img src="{% static 'Blog/img/'|add:post.post.author_details.badge|add:'.png' %}" class="user__badgep">
+                    {% endif %}
+                </a>
+                <div class="user__infop">
+                    <h5>{{post.post.author}}</h5>
+                    <small>{{post.post.post_time|custom_timesince}}</small>
+                </div>
+            </div>&nbsp&nbsp&nbsp&nbsp
+            <!-- Views Count with Eye Icon -->
+            <div class="views-count">
+                <i class="fas fa-eye"></i> {{post.post.views_count}}
+            </div>&nbsp&nbsp&nbsp&nbsp
+            <!-- Comments Count with Comment Icon -->
+            <div class="comments-count">
+                <i class="fas fa-comment"></i> {{post.post.comment_count}}
+            </div>
+        </div>
+    </div>
+
+    {% empty %}
+    {% block emt %}
+    <p>No post found.</p>
+    {% endblock %}
+    {% endfor %}
+</div>
+<nav aria-label="Page navigation example" id="n" style="margin-top:10px;">
+  <ul class="pagination">
+    {% if posts.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
+    {% endif %}
+
+    <li class="page-item"><span class="page-link">Page {{ posts.number }} of {{ posts.paginator.num_pages }}.</span></li>
+
+    {% if posts.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}" style="color:red;">Next</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{ posts.paginator.num_pages }}" style="color:red;">Last</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+</div>
+<br>
+
+<script>
+    // JavaScript to handle the Share button
+document.querySelectorAll('.share-button').forEach(shareButton => {
+    shareButton.addEventListener('click', () => {
+        const post = shareButton.closest('.spost');
+        const shareMenu = post.querySelector('.share-menu');
+         shareMenu.style.display = shareMenu.style.display === 'block' ? 'none' : 'block';
+    });
+});
+
+    document.querySelectorAll('.fbtn').forEach(favbtn => {
+
+    favbtn.addEventListener('click', () => {
+        const post = favbtn.closest('.fpost');
+        const fi = post.querySelector('#hi');
+       {% if request.user.is_authenticated %}
+         fi.style.color = fi.style.color === 'red' ? '#c0c0c0' : 'red';
+
+         {% else %}
+         alert('please login first');
+         {% endif %}
+    });
+});
+
+</script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).on('submit', '#fav', function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var postid = form.find('input[name="post_id"]').val();
+        console.log('post_id:', postid);
+
+        // Get the CSRF token from the cookie
+        var csrftoken = getCookie('csrftoken');
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "fav" %}',
+            data: {
+                post_id: postid
+            },
+            headers: {
+                'X-CSRFToken': csrftoken
+            },
+            success: function(data) {}
+        });
+    });
+
+    // Function to get the CSRF token from the cookie
+    function getCookie(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Add a click event listener to the copy link button
+        document.querySelectorAll('.fa-copy').forEach(function (copyIcon) {
+            copyIcon.addEventListener('click', function () {
+                // Get the post ID from the data-post-id attribute
+                var postId = this.getAttribute('data-post-id');
+
+                // Generate the URL for the individual post
+                var postURL = window.location.origin + '/clickedpost/' + postId + '/';
+
+                // Create a temporary input element
+                var tempInput = document.createElement('input');
+                tempInput.value = postURL;
+
+                // Append the input element to the body
+                document.body.appendChild(tempInput);
+
+                // Select the input text
+                tempInput.select();
+                tempInput.setSelectionRange(0, 99999); /* For mobile devices */
+
+                // Copy the text to the clipboard
+                document.execCommand('copy');
+
+                // Remove the temporary input element
+                document.body.removeChild(tempInput);
+
+                // Optionally, provide feedback to the user (e.g., show a tooltip or alert)
+                alert('Link copied to clipboard!');
+            });
+        });
+    });
+</script>
+
+
+{% endblock %}
+{% block post %}
+{% endblock %}

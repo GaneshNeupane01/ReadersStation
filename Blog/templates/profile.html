@@ -1,0 +1,1046 @@
+{% extends "base.html" %}
+
+{% block title %} Profile{% endblock %}
+
+
+
+
+{% block n %}
+
+{% endblock %}
+
+{% load static %}
+{% load custom_filters %}
+
+
+
+
+
+
+
+
+
+    {% block drop %}
+                    <div class="dropdown-menu" aria-labelledby="catsecond">
+                         <a class="dropdown-item" href="{% url 'flist' %}">Followers/Following list</a>
+        <a class="dropdown-item" href="{% url 'status' %}">Boost Xp</a>
+        {% if request.user.is_authenticated %}
+        <a class="dropdown-item" href="{% url 'fav' %}">My Bookmarked</a>
+        <a class="dropdown-item" href="{% url 'following_posts' %}">Following posts</a>
+        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+        <a class="dropdown-item" href="{% url 'register' %}">Signup</a>
+        {% endif %}
+                    </div>
+                        {% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+{% load static %}
+
+    <div class="profile-header">
+        <!-- Gradient background layer -->
+
+
+        <div class="container mt-5" >
+            <div class="profile-card" id="mt">
+
+                <div class="profile-image">
+ {% if userinfo.image %}
+
+                  <a href="/media/{{ userinfo.image }}" > <img src="/media/{{ userinfo.image }}" alt="User Profile Image" id="pimg"></a>
+
+              {% else %}
+                    <img src="{% static 'Blog/img/default.png' %}" >
+
+                    {% endif %}
+                </div>
+ <div class="edit-profile">
+                    <a href="{% url 'editprofile' %}">Edit Profile</a>
+                </div>
+
+                <div class="user-details">
+                    <h2 class="user-name">
+                        <div class="typing-container">
+                            <span id="typing-name">{{userinfo.user.username}}{% if userinfo.nickname %}({{userinfo.nickname}}){% endif %} </span>
+                        </div>
+                    </h2>
+                    <a href="{% url 'status' %}" style="text-decoration:none;">
+
+<div class="status">
+  <h4> your status: <img src="{% static 'Blog/img/'|add:userinfo.badge|add:'.png' %}">
+</h4>
+<h4>total xp: {{userinfo.xp}}</h4>
+
+                </div></a>
+                    <br>
+
+<div class="pcon">
+<br>
+
+
+                    <p class="user-email pp">Email: {{userinfo.user.email}}</p>
+
+                    <p class="user-description pp">{{userinfo.about}}</p>
+                    <div class="profile-stats">
+                        <div class="followers">
+                           <a href="{% url 'flist' %}"> <i class="fas fa-users"></i>
+                            <p>Followers</p>
+                            <p class="stat-number">{{followers_count}}</p></a>
+                        </div>
+                        <div class="followers"> <a href="{% url 'flist' %}">
+                            <i class="fas fa-users"></i>
+                            <p>Following</p>
+                            <p class="stat-number">{{following_count}}</p></a>
+                        </div>
+                        <div class="post">
+                            <i class="fas fa-blog"></i>
+                            <p>Posts</p>
+                            <p class="stat-number" >{{total_posts}}</p>
+                        </div>
+                        <div class="views">
+                            <i class="fas fa-eye"></i>
+                            <p>Views</p>
+                            <p class="stat-number">{{total_views}}</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+<a href="{% url 'logout' %}" class="logout-button">Logout</a>
+            </div>
+
+        </div>
+    </div>
+    <style>
+        /* Add custom styles to improve the appearance of the user profile */
+
+
+#mt{
+margin-top:-50px;
+}
+
+.profile-image{
+border-radius: 20px;
+    background: linear-gradient(rgb(27, 0, 80),rgb(17, 1, 74), rgba(255, 4, 54, 0), rgba(255, 4, 54, 0));
+
+  box-shadow:0 -10px 20px rgb(21, 0, 255);
+}
+
+.status{
+border-radius: 20px;
+    background: linear-gradient(rgb(27, 0, 80),rgb(17, 1, 74), rgba(255, 4, 54, 0), rgba(255, 4, 54, 0));
+color:#eee;
+  box-shadow:0 -10px 20px rgb(21, 0, 255);
+  padding-top:10px;
+  padding-bottom:10px;
+
+}
+.status img{
+width:40px;
+height:40px;
+border-radius:50%;
+}
+
+.typing-container {
+    display: inline-block;
+    width: 300px; /* Adjust the width as needed */
+    white-space: wrap;
+    overflow: hidden;
+}
+.pcon{
+    border-radius: 20px;
+    box-shadow:0 10px 20px rgb(21, 0, 255);
+}
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    margin-top: 40px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+}
+
+.edit-profile a {
+    text-decoration: none;
+    background: linear-gradient(45deg,rgb(211, 0, 0), rgb(28, 1, 160));
+    color: #fff;
+    box-shadow: 0 0 5px white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-top: 10px;
+}
+
+.edit-profile a:hover {
+    background: linear-gradient( rgba(46, 4, 255, 1),rgba(255, 0, 191, 1));
+}
+
+.user-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    color:rgb(129, 251, 237);
+}
+
+.user-email,.user-nickname,.user-gender {
+    font-size: 18px;
+    color: rgb(247, 255, 255);
+    white-space:pre-wrap;
+word-wrap:break-word;
+   margin-left:5px;
+    margin-right:5px;
+}
+
+.user-description {
+    font-size: 16px;
+    margin-top: 20px;
+white-space:pre-wrap;
+word-wrap:break-word;
+    color:rgb(241, 244, 244);
+    margin-left:5px;
+    margin-right:5px;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    color:rgb(255, 255, 255);
+     margin:20px;
+}
+
+.profile-stats .followers,
+.profile-stats .post,
+.profile-stats .views {
+    text-align: center;
+    color: #fff;
+}
+
+.profile-stats i {
+    font-size: 24px;
+    color: #00ffea;
+    margin-bottom: 5px;
+}
+
+.profile-stats p {
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.logout-button {
+    background-color: #ff4500;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+    box-shadow: 0 0 5px #0ef;
+}
+
+.logout-button:hover {
+    background-color: #e63500;
+}
+
+.past-posts {
+    margin-top: 30px;
+}
+
+
+/* Add custom styles to improve the appearance of the user profile */
+
+
+
+.profile-header {
+
+    position: relative;
+    background: linear-gradient(rgb(0, 1, 26), rgb(0, 1, 27));
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 50px 0;
+    z-index:1;
+}
+
+.profile-card {
+
+    background-color: linear-gradient(rgb(2, 0, 26), rgb(10, 0, 22));
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+/* Other styles remain the same */
+
+
+/* Add more custom styles and effects as needed */
+
+    </style>
+
+
+
+ <style>
+
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.fbtn i{
+position:absolute;
+margin-top:-18px;
+}
+    .read-more-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #FF6B6B, #6B47E0);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+
+        .read-more-button::before {
+            content: '\2192'; /* Right arrow Unicode character */
+            display: inline-block;
+            margin-right: 10px;
+            transform: skew(-20deg);
+            transition: transform 0.3s;
+        }
+
+        .read-more-button:hover {
+            background: linear-gradient(45deg, #6B47E0, #FF6B6B);
+        }
+
+        .read-more-button:hover::before {
+            transform: skew(-20deg) translateX(10px);
+        }
+  .posts p {
+   max-width:1200px;
+   overflow:hidden ;
+           height:40px;
+
+        }
+body {
+  font-family: "Quicksand", sans-serif;
+
+  height: 100vh;
+  background: #7f7fd5;
+  background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+}
+.gridpart{
+display:grid;
+  place-items: center;pys
+}
+.containerp{
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin-block: 2rem;
+  gap: 4rem;
+}
+.card__headerp{
+position: relative;
+    display: inline-block;}
+.card__headerp img {
+  max-width: 1200px;
+  height:200px;
+  display: block;
+  object-fit: cover;
+}
+.user__badgep {
+  border-radius: 50%;
+  width:16px;
+  height:16px;
+  margin-top:22px;
+  margin-left:26px;
+  border:2px solid white;
+  position:absolute;
+}
+
+.cardp {
+  display: flex;
+  flex-direction: column;
+  width: clamp(20rem, calc(20rem + 2vw), 22rem);
+  overflow: hidden;
+  box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  background: #ECE9E6;
+background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+
+}
+
+
+
+.card__bodyp {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+
+.tag {
+  align-self: flex-start;
+  padding: .25em .75em;
+  border-radius: 1em;
+  font-size: .75rem;
+}
+
+.tag + .tag {
+  margin-left: .5em;
+}
+
+.tag-blue {
+  background: #56CCF2;
+background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+  color: #fafafa;
+}
+
+.tag-brown {
+  background: #D1913C;
+background: linear-gradient(to bottom, #FFD194, #D1913C);
+  color: #fafafa;
+}
+
+.tag-red {
+  background: #cb2d3e;
+background: linear-gradient(to bottom, #ef473a, #cb2d3e);
+  color: #fafafa;
+}
+
+.card__bodyp h4 {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+.card__footerp{
+  display: flex;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.userp {
+  display: flex;
+  gap: .5rem;
+}
+
+.user__imagep {
+  border-radius: 50%;
+  width:40px;
+  height:40px;
+}
+
+.user__infop > small {
+  color: #666;
+
+}
+
+
+.edit {
+    position: absolute;
+    top: 10px; /* Adjust this value to move the button vertically */
+    right: 10px; /* Adjust this value to move the button horizontally */
+    background: rgba(0, 0, 0, 0.5); /* Background color for the button (semi-transparent black) */
+    padding: 5px 10px; /* Adjust padding to your preference */
+    border: none;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.edit a{
+     color:white;
+     }
+    </style>
+
+
+    <!-- Your content goes here -->
+<!-- Close the div for the block content -->
+
+
+<style>
+
+.share-button{
+position:absolute;
+margin-top:-33px;
+margin-left:200px;
+width:20px;
+background:transparent;
+border:none;
+cursor:pointer;
+
+}
+.fbtn{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left:250px;
+
+ width:0;
+ height:0;
+}
+.fbtn i{
+font-size:24px;
+
+
+}
+#fav{
+margin-top:-30px;
+}
+    #tb li a {
+    color:black;
+    text-decoration:none;
+    cursor:pointer;
+    }
+    .share-menu a{
+
+font-size:24px;
+}
+</style>
+
+<script>
+    // JavaScript to handle the Share button
+document.querySelectorAll('.share-button').forEach(shareButton => {
+    shareButton.addEventListener('click', () => {
+        const post = shareButton.closest('.spost');
+        const shareMenu = post.querySelector('.share-menu');
+         shareMenu.style.display = shareMenu.style.display === 'block' ? 'none' : 'block';
+    });
+});
+
+    document.querySelectorAll('.fbtn').forEach(favbtn => {
+    favbtn.addEventListener('click', () => {
+        const post = favbtn.closest('.fpost');
+        const fi = post.querySelector('#hi');
+         fi.style.color = fi.style.color === 'red' ? '#c0c0c0' : 'red';
+    });
+});
+
+</script>
+
+
+
+
+
+
+<div class="container mt-3">
+
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" id="tb">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home">my post</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">fav post</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu2">following post</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+
+     <div class="gridpart">
+<div class="containerp">
+    <!-- Post 1 -->
+    {% for post in myposts %}
+
+
+    <div class="cardp">
+        <div class="card__headerp">
+            <button class="edit"><a href="{% url 'editpost' post.pk %}">Edit</a></button>
+             {% if post.image %}
+            <img src="/media/{{ post.image }}"  class="card__image" width="600">
+            {% else %}
+            <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card__image" width="600">
+            {% endif %}
+        </div>
+        <div class="card__bodyp">
+            {% if post.category == "art and culture" %}
+             <span class="tag tag-red">{{post.category}}</span>
+
+            {% elif post.category == "literature" %}
+            <span class="tag tag-blue">{{post.category}}</span>
+            {% else %}
+            <span class="tag tag-brown">{{post.category}}</span>
+             {% endif %}
+<form id="fav">
+                {% csrf_token %}
+                <input type="hidden" value="{{post.pk}}" name="post_id">
+                {% if post.pk in bposts %}
+                 <span class="fpost">
+                <button type="submit" class="fbtn"><i class="fa fa-heart" style="color:red;" id="hi"></i></button></span>
+                {% else %}
+                <span class="fpost">
+                <button type="submit" class="fbtn"><i class="fa fa-heart" style="color:#c0c0c0;" id="hi"></i></button></span>
+                {% endif %}
+            </form>
+<span class="spost">
+    <!-- Your post content -->
+   <span class="share-button"><i class="fas fa-share" style="font-size: 24px; color: #aaa;"></i></span>
+    <span class="share-menu" style="display: none;">
+<a href="https://www.facebook.com/sharer/sharer.php?u=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-facebook"></i>
+</a>
+&nbsp
+<!-- WhatsApp -->
+<a href="https://wa.me/?text=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Instagram -->
+&nbsp
+
+<!-- Twitter -->
+<a href="https://twitter.com/intent/tweet?url=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-twitter"></i>
+</a>
+&nbsp
+<!-- Messenger -->
+<a href="https://www.messenger.com/share.php?u=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-facebook-messenger"></i>
+</a>
+        &nbsp
+         <i class="fas fa-copy" style="font-size: 24px; color: #aaa;" data-post-id="{{ post.pk }}"></i>
+    </span>
+</span>
+
+
+            <h4>{{post.title}}</h4>
+
+
+
+            <a href="{% url 'clickedpost' post.pk %}"> <button class="read-more-button">Read More</button></a>
+        </div>
+        <div class="card__footerp">
+            <div class="userp">
+                <a href="{% url 'userprofile' post.author.id %}">
+                    {% if post.author_details.image %}
+                    <img src="/media/{{ post.author_details.image }}" alt="user__image" class="user__imagep">
+                      {% else %}
+                    <img src="{% static 'Blog/img/default.png' %}"  alt="user__image" class="user__imagep">
+                    {% endif %}
+                </a>
+                {% if post.author_details.badge %}
+                    <img src="{% static 'Blog/img/'|add:post.author_details.badge|add:'.png' %}" class="user__badgep">
+                    {% endif %}
+                <div class="user__infop">
+                    <h5>{{post.author}}</h5>
+                    <small>{{post.post_time|custom_timesince}}</small>
+                </div>
+            </div>&nbsp&nbsp&nbsp&nbsp
+            <!-- Views Count with Eye Icon -->
+            <div class="views-count">
+                <i class="fas fa-eye"></i> {{post.views_count}}
+            </div>&nbsp&nbsp&nbsp&nbsp
+            <!-- Comments Count with Comment Icon -->
+            <div class="comments-count">
+                <i class="fas fa-comment"></i> {{post.comment_count}}
+            </div>
+        </div>
+    </div>
+
+    {% empty %}
+    <p>No post found.</p>
+    {% endfor %}
+</div>
+
+</div>
+
+
+
+    </div>
+    <div id="menu1" class="container tab-pane fade"><br>
+
+
+<style >
+
+	.txtts{
+	color:black;
+	background:red;
+	}
+</style>
+
+
+<style>
+
+.share-button{
+position:absolute;
+margin-top:-33px;
+margin-left:200px;
+width:20px;
+background:transparent;
+border:none;
+cursor:pointer;
+
+}
+.fbtn{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left:250px;
+
+ width:0;
+ height:0;
+}
+.fbtn i{
+font-size:24px;
+
+
+}
+#fav{
+margin-top:-30px;
+}
+</style>
+
+
+
+
+<div class="gridpart">
+<span style="width:100%;"><a href="{% url 'fav' %}" style="float:right;color:#fff;font-weight:bold;font-size:20px;margin-right:5px;">See All</a></span>
+<div class="containerp">
+    <!-- Post 1 -->
+    {% for post in bookmarked_posts|slice:":6" %}
+
+
+    <div class="cardp">
+        <div class="card__headerp">
+            {% if post.post.image %}
+            <img src="/media/{{ post.post.image }}" alt="card__image" class="card__image" width="600">
+            {% else %}
+            <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card__image" width="600">
+            {% endif %}
+        </div>
+        <div class="card__bodyp">
+            {% if post.post.category == "art and culture" %}
+             <span class="tag tag-red">{{post.post.category}}</span>
+
+            {% elif post.post.category == "literature" %}
+            <span class="tag tag-blue">{{post.post.category}}</span>
+            {% else %}
+            <span class="tag tag-brown">{{post.post.category}}</span>
+             {% endif %}
+<form id="fav">
+                {% csrf_token %}
+                <input type="hidden" value="{{post.post.pk}}" name="post_id">
+
+                 <span class="fpost">
+                <button type="submit" class="fbtn"><i class="fa fa-heart" style="color:red;" id="hi"></i></button></span>
+
+            </form>
+<span class="spost">
+    <!-- Your post content -->
+   <span class="share-button"><i class="fas fa-share" style="font-size: 24px; color: #aaa;"></i></span>
+    <span class="share-menu" style="display: none;">
+<a href="https://www.facebook.com/sharer/sharer.php?u=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-facebook"></i>
+</a>
+&nbsp
+<!-- WhatsApp -->
+<a href="https://wa.me/?text=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+&nbsp
+<!-- Instagram -->
+
+
+<!-- Twitter -->
+<a href="https://twitter.com/intent/tweet?url=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-twitter"></i>
+</a>
+&nbsp
+<!-- Messenger -->
+<a href="https://www.messenger.com/share.php?u=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-facebook-messenger"></i>
+</a>
+        &nbsp
+         <i class="fas fa-copy" style="font-size: 24px; color: #aaa;" data-post-id="{{ post.pk }}"></i>
+    </span>
+</span>
+
+
+            <h4>{{post.post.title}}</h4>
+
+
+
+            <a href="{% url 'clickedpost' post.post.pk %}"> <button class="read-more-button">Read More</button></a>
+        </div>
+        <div class="card__footerp">
+            <div class="userp">
+                <a href="{% url 'userprofile' post.post.author.id %}">
+                     {% if post.post.author_details.image %}
+                    <img src="/media/{{ post.post.author_details.image }}" alt="user__image" class="user__imagep">
+                      {% else %}
+                    <img src="{% static 'Blog/img/default.png' %}"  alt="user__image" class="user__imagep">
+                    {% endif %}</a>
+                {% if post.post.author_details.badge %}
+                    <img src="{% static 'Blog/img/'|add:post.post.author_details.badge|add:'.png' %}" class="user__badgep">
+                    {% endif %}
+                <div class="user__infop">
+                    <h5>{{post.post.author}}</h5>
+                    <small>{{post.post.post_time|custom_timesince}}</small>
+                </div>
+            </div>&nbsp&nbsp&nbsp&nbsp
+            <!-- Views Count with Eye Icon -->
+            <div class="views-count">
+                <i class="fas fa-eye"></i> {{post.post.views_count}}
+            </div>&nbsp&nbsp&nbsp&nbsp
+            <!-- Comments Count with Comment Icon -->
+            <div class="comments-count">
+                <i class="fas fa-comment"></i> {{post.post.comment_count}}
+            </div>
+        </div>
+    </div>
+
+    {% empty %}
+    <p>No post found.</p>
+    {% endfor %}
+</div>
+
+</div>
+
+
+
+    </div>
+    <div id="menu2" class="container tab-pane fade"><br>
+
+      <div class="gridpart">
+
+          <span style="width:100%;"><a href="{% url 'following_posts' %}" style="float:right;color:#fff;font-weight:bold;font-size:20px;margin-right:5px;">See All</a></span>
+<div class="containerp">
+    <!-- Post 1 -->
+    {% for post in posts|slice:":6" %}
+
+
+
+
+
+
+
+    <div class="cardp">
+        <div class="card__headerp">
+            {% if post.image %}
+            <img src="/media/{{ post.image }}" alt="card__image" class="card__image" width="600">
+{% else %}
+            <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card__image" width="600">
+            {% endif %}
+        </div>
+        <div class="card__bodyp">
+            {% if post.category == "art and culture" %}
+             <span class="tag tag-red">{{post.category}}</span>
+
+            {% elif post.category == "literature" %}
+            <span class="tag tag-blue">{{post.category}}</span>
+            {% else %}
+            <span class="tag tag-brown">{{post.category}}</span>
+             {% endif %}
+<form id="fav">
+                {% csrf_token %}
+                <input type="hidden" value="{{post.pk}}" name="post_id">
+                {% if post.pk in bposts %}
+                 <span class="fpost">
+                <button type="submit" class="fbtn"><i class="fa fa-heart" style="color:red;" id="hi"></i></button></span>
+                {% else %}
+                <span class="fpost">
+                <button type="submit" class="fbtn"><i class="fa fa-heart" style="color:#c0c0c0;" id="hi"></i></button></span>
+                {% endif %}
+            </form>
+<span class="spost">
+    <!-- Your post content -->
+   <span class="share-button"><i class="fas fa-share" style="font-size: 24px; color: #aaa;"></i></span>
+    <span class="share-menu" style="display: none;">
+<a href="https://www.facebook.com/sharer/sharer.php?u=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-facebook"></i>
+</a>
+&nbsp
+<!-- WhatsApp -->
+<a href="https://wa.me/?text=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+&nbsp
+<!-- Instagram -->
+
+
+<!-- Twitter -->
+<a href="https://twitter.com/intent/tweet?url=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-twitter"></i>
+</a>
+&nbsp
+<!-- Messenger -->
+<a href="https://www.messenger.com/share.php?u=/clickedpost/{{ post.pk }}" class="share-social" target="_blank">
+    <i class="fab fa-facebook-messenger"></i>
+</a>
+        &nbsp
+         <i class="fas fa-copy" style="font-size: 24px; color: #aaa;" data-post-id="{{ post.pk }}"></i>
+    </span>
+</span>
+
+
+            <h4>{{post.title}}</h4>
+
+
+
+            <a href="{% url 'clickedpost' post.pk %}"> <button class="read-more-button">Read More</button></a>
+        </div>
+        <div class="card__footerp">
+            <div class="userp">
+                <a href="{% url 'userprofile' post.author.id %}">
+                      {% if post.author_details.image %}
+                    <img src="/media/{{ post.author_details.image }}" alt="user__image" class="user__imagep">
+                      {% else %}
+                    <img src="{% static 'Blog/img/default.png' %}"  alt="user__image" class="user__imagep">
+                    {% endif %}</a>
+                {% if post.author_details.badge %}
+                    <img src="{% static 'Blog/img/'|add:post.author_details.badge|add:'.png' %}" class="user__badgep">
+                    {% endif %}
+                <div class="user__infop">
+                    <h5>{{post.author}}</h5>
+                    <small>{{post.post_time|custom_timesince}}</small>
+                </div>
+            </div>&nbsp&nbsp&nbsp&nbsp
+            <!-- Views Count with Eye Icon -->
+            <div class="views-count">
+                <i class="fas fa-eye"></i> {{post.views_count}}
+            </div>&nbsp&nbsp&nbsp&nbsp
+            <!-- Comments Count with Comment Icon -->
+            <div class="comments-count">
+                <i class="fas fa-comment"></i> {{post.comment_count}}
+            </div>
+        </div>
+    </div>
+
+    {% empty %}
+    <p>No post found.</p>
+    {% endfor %}
+</div>
+
+</div>
+
+    </div>
+  </div>
+</div>
+<script>
+    // JavaScript to handle the Share button
+document.querySelectorAll('.share-button').forEach(shareButton => {
+    shareButton.addEventListener('click', () => {
+        const post = shareButton.closest('.spost');
+        const shareMenu = post.querySelector('.share-menu');
+         shareMenu.style.display = shareMenu.style.display === 'block' ? 'none' : 'block';
+    });
+});
+
+    document.querySelectorAll('.fbtn').forEach(favbtn => {
+    favbtn.addEventListener('click', () => {
+        const post = favbtn.closest('.fpost');
+        const fi = post.querySelector('#hi');
+         fi.style.color = fi.style.color === 'red' ? '#c0c0c0' : 'red';
+    });
+});
+
+</script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).on('submit', '#fav', function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var postid = form.find('input[name="post_id"]').val();
+        console.log('post_id:', postid);
+
+        // Get the CSRF token from the cookie
+        var csrftoken = getCookie('csrftoken');
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "fav" %}',
+            data: {
+                post_id: postid
+            },
+            headers: {
+                'X-CSRFToken': csrftoken
+            },
+            success: function(data) {}
+        });
+    });
+
+    // Function to get the CSRF token from the cookie
+    function getCookie(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Add a click event listener to the copy link button
+        document.querySelectorAll('.fa-copy').forEach(function (copyIcon) {
+            copyIcon.addEventListener('click', function () {
+                // Get the post ID from the data-post-id attribute
+                var postId = this.getAttribute('data-post-id');
+
+                // Generate the URL for the individual post
+                var postURL = window.location.origin + '/clickedpost/' + postId + '/';
+
+                // Create a temporary input element
+                var tempInput = document.createElement('input');
+                tempInput.value = postURL;
+
+                // Append the input element to the body
+                document.body.appendChild(tempInput);
+
+                // Select the input text
+                tempInput.select();
+                tempInput.setSelectionRange(0, 99999); /* For mobile devices */
+
+                // Copy the text to the clipboard
+                document.execCommand('copy');
+
+                // Remove the temporary input element
+                document.body.removeChild(tempInput);
+
+                // Optionally, provide feedback to the user (e.g., show a tooltip or alert)
+                alert('Link copied to clipboard!');
+            });
+        });
+    });
+</script>
+
+{% endblock %}
+{% block post %}
+{% endblock %}
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,142 @@
+
+{% extends "base.html" %}
+
+{% block title %}search {% endblock %}
+{% block topnav %}
+{% endblock %}
+{% block n %}
+{% endblock %}
+{% block content %}
+
+    <style>
+article{
+display: grid;
+  min-height: 70vh;
+  align-items: center;
+  place-items: center;
+}
+body {
+  font-size: 16px;
+
+  font-family: sans-serif;
+  margin: 0 20px;
+  background-color: red;
+}
+
+article {
+  max-width: 500px;
+
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 20px;
+  width: 100%;
+  gap: 20px;
+
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+#sform {
+  position: relative;
+  width: 100%;
+}
+
+#sform i {
+  position: absolute;
+  font-size: 1.2rem;
+  padding: 18px;
+  cursor:pointer;
+}
+
+#sform input {
+    border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+  display: flex;
+  padding-left: 40px;
+}
+
+#List {
+  list-style: none;
+  font-size: 1.25rem;
+  width: 100%;
+  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#List li {
+  background-color:rgba(10, 0, 55, 0.2);
+  padding: 4px;
+  border-radius: 10px;
+}
+
+#List li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+    </style>
+
+
+
+		<article>
+        <h1>Search and Filter</h1>
+        <form id="sform" method="post" action="{% url 'search_view' %}">
+            {% csrf_token %}
+            <button type="submit" style="height:0;width:0;background:transparent;border:none;">
+           <i class="fas fa-search" style="margin-top:4px;"></i></button>
+            <input type="text" name="search" placeholder="Type search phrase..." id="searchBox">
+        </form>
+        <ul id="List">
+              <li><a href="{% url 'science' %}">science</a></li>
+            <li><a href="{% url 'literature' %}">literature</a></li>
+            <li><a href="{% url 'technology' %}">tech</a></li>
+
+            <li><a href="{% url 'educationandlearning' %}">education</a></li>
+             <li><a href="{% url 'history' %}">history</a></li>
+            <li><a href="{% url 'gamesandsports' %}">games and sports</a></li>
+
+            <li><a href="{% url 'mythology' %}">mythology</a></li>
+            <li><a href="{% url 'artandculture' %}">art and culture</a></li>
+            <li><a href="{% url 'foodandtravel' %}">food and travel</a></li>
+<li><a href="{% url 'newest_posts' %}">newest posts</a></li>
+            <li><a href="{% url 'most_viewed_posts' %}">most viewed</a></li>
+ <li><a href="{% url 'all_posts' %}">all posts</a></li>
+            <li><a href="{% url 'others' %}">others</a></li>
+            <li><a href="{% url 'memes' %}">memes</a></li>
+          </ul>
+    </article>
+{% endblock %}
+{% block act %}
+ <a href="{% url 'home' %}" class="nav__link">
+    <i class="material-icons nav__icon">home</i>
+    <span class="nav__text">Home</span>
+  </a>
+  <a href="{% url 'search' %}" class="nav__link nav__link--active">
+    <i class="material-icons nav__icon">search</i>
+    <span class="nav__text">Search</span>
+  </a>
+   <div class="nav-slot curve">
+          <a href="{% url 'addpost' %}" role="button" class="floating-button">
+          <i class="fa fa-plus" id="pi"></i>
+          </a>
+       <span id="stick"></span>
+        </div>
+  <a href="{% url 'leaderboard' %}" class="nav__link">
+    <i class="fas fa-trophy"></i>
+    <span class="nav__text">leaderboard</span>
+  </a>
+{% endblock %}
+{% block emt %}
+{% endblock %}
+{% block page %}
+{% endblock %}
+{% block footer %}
+{% endblock %}

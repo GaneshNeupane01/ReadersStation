@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}About - Site{% endblock %}
+{% block n %}
+{% endblock %}
+{% block content %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 10px;
+        }
+
+        #sec {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+        }
+
+
+
+
+    </style>
+
+
+    <header>
+        <h1>ReadersStation</h1>
+        <p>Your go-to platform for diverse discussions on tech, science, literature,memes,food and travel,education,arts and culture,mythology,games and sports and history.</p>
+    </header>
+
+    <section id="sec">
+        <h2>About Us</h2>
+        <p>Welcome to ReadersStation, where curiosity meets community. We believe in the power of knowledge-sharing and discussions across various topics. Whether you're passionate about technology, science, literature,memes,food and travel,education,arts and culture,mythology,games and sports or history, this is the place for you.</p>
+
+        <h2>Privacy Policy</h2>
+        <p><b>Information Collected</b><br><br>
+
+    1.Personal Information: We collect information provided during account creation, such as your name and email address.
+<br><br>
+    2.Usage Data:<br> We may collect data on how you interact with the platform, such as your posts and comments.
+<br><br>
+<b>How We Use Your Information</b><br><br>
+
+   1. Personalization: We use your information to personalize your experience on ReadersStation.
+<br><br>
+    2. Communication: We may send you important updates, announcements, or promotional content via email.
+<br><br>
+<b>Data Security</b><br><br>
+
+    1. Protection: We implement security measures to protect your information. However, no method of transmission over the internet is entirely secure.
+<br><br>
+    2. Third-Party Access: We do not sell or provide your personal information to third parties for marketing purposes.
+<br><br>
+<b>Cookies</b><br><br>
+
+   1. Cookies: We use cookies to enhance your user experience. You can disable cookies in your browser settings, but this may affect certain features.
+<br><br>
+<b>Changes to Privacy Policy</b><br><br>
+
+ReadersStation may update this privacy policy. Users will be notified of significant changes, and continued use of the platform constitutes acceptance of the updated policy.</p>
+<br>
+        <h2>Terms and Conditions</h2>
+        <p><b>
+Introduction</b><br><br>
+
+Welcome to ReadersStation! By using this website, you agree to comply with and be bound by the following terms and conditions of use. Please read these terms carefully before using our platform.
+<br><br><b>
+User Conduct</b><br><br>
+
+    1.Content: Users are responsible for the content they post. Ensure that your posts are respectful, lawful, and adhere to our community guidelines.
+<br><br>
+    2.Account Security: You are responsible for maintaining the security of your account. Do not share your login credentials, and notify us immediately of any unauthorized use.
+<br><br><b>
+Intellectual Property</b><br><br>
+
+   1. Ownership: ReadersStation retains ownership of all content on the platform. Users retain ownership of their posted content but grant ReadersStation a license to use, display, and distribute it.
+<br><br>
+   2. Copyright: Respect copyright laws. Do not post content that violates the intellectual property rights of others.
+<br><br><b>
+Termination</b><br><br>
+
+ReadersStation reserves the right to terminate accounts that violate our terms of service or community guidelines without prior notice.</p>
+<br>
+
+
+        <h2>Contact Us</h2>
+
+
+        <p>Have questions or suggestions? Feel free to <a href="{% url 'contact' %}">contact us</a>. We value your feedback and are here to assist you.</p>
+    </section>
+
+
+
+
+
+{% endblock %}
+{% block page %}
+{% endblock %}
+{% block post %}
+{% endblock %}

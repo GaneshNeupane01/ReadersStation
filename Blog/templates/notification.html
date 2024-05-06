@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>notification</title>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+{% load custom_filters %}
+
+
+
+<style>
+    body{
+    font-size:2rem;
+    }
+#bk{
+position:absolute;
+top:20px;
+left:20px;
+color:black;
+font-size:4rem;
+
+z-index:4;
+text-decoration:none;
+}
+</style><a href="javascript:history.back()" title="Go Back" id="bk">&larr;</a>
+<br><br><br>
+<h2>Unread notifications</h2>
+<ul class="list-group">
+           {% for n in unotifications %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="user-info d-flex align-items-center">
+
+                    <a href="{% url 'userprofile' n.sender.id %}">{{n.sender.username}}
+                         </a>
+                    {{n.message}}
+<br>
+                    {{n.time|custom_timesince}}
+
+
+                </div>
+                 </li>
+    {% empty %}
+    No notifications.
+                {% endfor %}
+        </ul>
+<br>
+<h1>All notifications</h1>
+<ul class="list-group">
+           {% for n in notifications %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="user-info d-flex align-items-center">
+
+                    <a href="{% url 'userprofile' n.sender.id %}">{{n.sender.username}}
+                         </a>
+                    {{n.message}}
+<br>
+                    {{n.time|custom_timesince}}
+
+
+                </div>
+                 </li>
+    {% empty %}
+    No notifications.
+                {% endfor %}
+        </ul>
+</body>
+</html>
