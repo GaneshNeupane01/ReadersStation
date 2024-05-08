@@ -1,0 +1,431 @@
+
+
+
+.dp-aal{
+	display: none;position: absolute;width: 150px;background:transparent;
+	top: -30px;
+	left: -10px;text-align: center;
+	z-index: 111;
+	
+}
+.logo{
+	display: inline;
+	position: absolute;
+	filter: brightness(.6);
+}
+.logoft{
+	display: inline;
+	position: absolute;
+	filter: brightness(1.2);
+
+}
+.dp-aal1{
+	display: none;position: absolute;width: 150px;background:transparent;
+	top: 25px;z-index: 111;
+	left: -30px;text-align: center;
+}
+span#nbc:hover > .dp-aal{
+display: block;position: relative;
+}
+span#nbc1:hover > .dp-aal1{
+	display: block;position: relative;
+	}
+.dp-aal a{
+	display: block;
+	color: azure;
+	width: 150px;
+z-index: 111;
+	height: 45px;
+	margin: -10px;
+	border: 5px solid black;
+	background-color: blue;
+	padding-top: 0px;}
+.dp-aal1 a{
+	display: block;
+	color: azure;
+	margin: -10px;
+	text-align: center;
+height: 45px;
+	width: 150px;border: 5px solid black;
+	background-color: blue;
+	padding-top: 0px;
+	
+}
+.dp-aal1 a:hover{
+	background-color: rgb(255, 0, 0);
+}
+.dp-aal a:hover{
+	background-color: rgb(255, 0, 0);
+}.nb{
+	position: relative;
+	left: 40px;
+	top: -54px;
+	color: antiquewhite;
+	animation: nbb 3s linear infinite;
+}
+.nb:hover{
+	transition: 2s;
+	color: rgb(221, 0, 255);
+}.dis {
+	top: 160px;
+	color: white;
+	font-weight: bold;
+	font-size: 35px;
+	left: 43%;
+	position: absolute;
+	animation: diss 3s linear infinite;
+}
+@keyframes diss{
+	0%{color: white;}
+	20%{color: blueviolet;}
+	40%{color: yellow;}
+	70%{color: green;}
+	100%{color: deeppink;}
+}
+span.nb{
+
+}
+ul{
+	position: relative;
+	top: -10px;
+	margin-left: 730px;
+
+	filter: brightness(1);
+		display: flex;
+}
+
+nav ul{
+
+}
+.about{
+	margin-top: -17px;
+	margin-left: 37px;
+	color: white;
+}
+ul  li{
+
+	
+list-style: none;
+float: left;
+	
+	border-radius: 50%;
+	margin-left: 0px;
+	padding-left: 13px;
+	padding-top: 10px;
+	margin: 50px;
+	
+	box-shadow: 0 0 5px rgb(29, 4, 255),0 0 10px rgb(251, 141, 141),1px 1px 25px rgb(238, 0, 255)
+	 ;animation:rt 3s linear infinite ;
+
+
+	position: relative;
+	
+	height: 27px;
+	width: 27px;
+	
+}
+ul li i{
+	color: white;
+}
+
+#ic11{
+
+	
+margin-left: -3px;
+margin-top: -2px;
+
+}
+#dsp{
+
+margin-left: -2px;
+margin-top: -2px;
+}
+.hm1 > i #dsp{
+	
+}
+#iconh{
+	margin-left: 4px;
+}
+
+
+
+.hm1:hover{
+	background: linear-gradient(rgb(153, 0, 255),rgb(255, 3, 3));
+}
+.hm2:hover{
+	background: linear-gradient(rgb(153, 0, 255),rgb(255, 3, 3));
+}
+.hm3:hover{
+	background: linear-gradient(rgb(153, 0, 255),rgb(255, 3, 3));
+}
+.hm4:hover{
+	background: linear-gradient(rgb(153, 0, 255),rgb(255, 3, 3));
+}
+
+
+.hm0{
+	background: linear-gradient(rgb(153, 0, 255),rgb(255, 3, 3));
+}
+.hm1{
+	background: linear-gradient(rgb(0, 0, 0),rgb(12, 12, 12));
+	opacity: 1;
+}
+.hm2{
+	background: linear-gradient(rgb(0, 0, 0),rgb(12, 12, 12));
+
+}
+
+.hm3{
+	background: linear-gradient(rgb(0, 0, 0),rgb(12, 12, 12));
+	
+}
+
+.hm4{
+	background: linear-gradient(rgb(0, 0, 0),rgb(12, 12, 12));
+	opacity: 1;
+}
+ul li a i,#dsp{
+	color: azure;position: relative;top: -18px;left: -20px;
+	padding: 20px;display: inline-block;
+}
+ul li a{
+	text-decoration: none;
+}
+
+
+ul li:hover{
+	transition: 3s;
+	color: blanchedalmond;
+	background: red;
+	transform: scale(1);
+	box-shadow: 0 0 100px rgb(29, 4, 255),0 0 200px rgb(251, 99, 99)
+	 ;filter: hue-rotate(360deg);
+}
+.nb{
+	position: relative;
+	left: 40px;
+	top: -54px;
+	color: antiquewhite;
+	animation: nbb 3s linear infinite;
+}
+.nb:hover{
+	transition: 2s;
+	color: rgb(221, 0, 255);
+}.logo img{
+	
+	
+height: 150px;	
+width: 150px;
+position: relative;
+	
+}
+.logoft img{
+	top: 10px;
+	left: -700px;
+height: 150px;	
+width: 150px;
+position: relative;
+	
+}
+h1 span.dis{
+position: absolute;
+left: -600px;
+top: 150px;
+
+}.logo{
+	display: inline;
+	position: absolute;
+	filter: brightness(.6);
+}
+.logoft{
+	display: inline;
+	position: absolute;
+	filter: brightness(1.2);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body{
+	background: black;
+
+	justify-content: center;
+	background:linear-gradient(rgba(10, 10, 10, 0.3),rgba(0, 0, 0, 0.7)), 
+	url('E:\Ganesh learnig things/loginb3.jpg');
+
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.register{
+box-shadow: inset 0 0 20px  black;
+	height: 98%;
+	width: 98%;
+	border-radius: 80px;
+	outline: white;
+	border:inset; 20px solid white;
+
+}
+.becomemember span{
+	color: white;
+	margin-top: 10px;
+	text-align: center;
+	margin-left: 30%;
+}
+.becomemember{
+
+		
+	overflow: hidden;
+	width: 35%;
+	height: 87vh;
+margin-top: -20px;
+margin-bottom: 50px;
+margin-left: 36%;
+	border:none;
+	box-shadow: 0 0 20px black;
+}
+.becomemember h1{
+	
+	color: white;
+	margin-top: 5%;
+	margin-left: 37%;
+	letter-spacing: 5px;
+	font-size: 40px;
+	height: 42px;
+	width: 240px;
+}
+.circ{
+	position: relative;
+	display: flex;
+	left: 5%;
+	top: 40px;
+	
+}
+span.circ
+{
+	
+	border: calc(1px*var(--i))solid transparent;
+	height: 5px;
+	width: 5px;
+	background: transparent;
+	margin: 10px 20px;
+	border-radius: 70%;
+	box-shadow: 0 0  50px 4px red,250px 7px  30px 5px red,
+	0 0  20px 5px red,
+	-100px 60px  20px 2px yellow,
+	100px 50px  20px 6px blue,200px 200px 30px 5px  white,-30px 200px 25px 5px green,-200px 20px 30px 4px  white,
+	30px 90px 9px  blue,0 0  20px 6px rgb(246, 255, 0),0 0  19px 5px rgb(89, 0, 255);
+animation: ball 14s linear infinite;
+animation-duration: calc(700s/var(--i));
+animation-delay: -10s;
+}
+.circ span:nth-child(odd){
+	background: rgb(241, 249, 3);
+	margin: 0 8px;
+	border-radius: 70%;
+	box-shadow: 0 20px  20px 5px yellow;
+	box-shadow: 0 0  25px 7px rgb(254, 197, 197),
+	-100px 60px  30px 7px yellow,200px 60px  30px 7px yellow,
+	150px 50px  50px 7px blue,200px 200px 25px 5px white,-300px 200px 15px 4px green,-200px 20px 30px 3px  white,
+	150px 90px  35px 9px  blue,0 0  29px 3px rgb(0, 179, 255),
+	0 0  34px 5px rgb(0, 255, 85), 300px 200px 30px 2px white,-30px 250px 35px 6px green,
+	300px 200px 30px 5px blue;
+
+}
+@keyframes ball{
+	0%{transform: translateY(1000px) scale(0);opacity: 0}
+	20%{opacity: .2;filter: hue-rotate(190deg);}
+	40%{opacity: .4;filter: hue-rotate(270deg);}
+	100%{transform: translateY(-1000px) scale(1);filter: hue-rotate(360deg); opacity:0.2 }
+
+}
+.becomemember label{
+margin-left: 70px;
+padding-top: 20px;
+font-size: 18px;
+color: white;
+}
+.becomemember label{
+	
+}
+.becomemember input[type=name],input[type=password],input[type=email],input[type=text]{
+	color: white;
+	outline: none;
+	width: 70%;
+	height: 40px;
+box-shadow: 0 0 3px white;
+border-radius: 20px;
+	background:rgba(0, 0, 0, .4);
+	border: 1px solid white;
+	margin-left: 15%;
+	display: block;
+	margin-top: 5px;
+	font-size: 18px;
+}
+
+.becomemember input[type=radio]{
+	margin-left: 20px;
+	height: 15px;
+	width: 25px;
+
+}
+.becomemember a button:hover{
+background: red;
+transform: scale(1.05);
+}
+
+.becomemember button.sbt{
+	margin-left: 25%;
+	color: white;
+	font-size: 20px;
+	height: 40px;
+	width: 50%;
+	border-radius: 20px;
+	margin-bottom: 10px;
+top:20px;
+box-shadow: none;
+	background: darkblue}
+	.becomemember button.sbt:hover{
+		
+		background: red;
+	}
+	.becomemember span a{
+		color: blue;
+	}
+
+::placeholder{
+	color: white;
+	text-align: center;
+	opacity: .7;
+}
+@media screen and (max-width: 1000px){
+	body{
+
+	}
+	.becomemember button.sbt{
+		margin-top: -18px;
+	}
+	.becomemember span.dt{
+	position: absolute;
+	left: -1%;
+	top: 89%;
+	}
+.becomemember
+{
+	width: 80%;
+}
+
+}
