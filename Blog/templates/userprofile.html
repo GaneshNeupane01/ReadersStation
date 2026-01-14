@@ -24,7 +24,7 @@
 
                     {% if ouserinfo.image %}
 
-                  <a href="/media/{{ ouserinfo.image }}" > <img src="/media/{{ ouserinfo.image }}"></a>
+                  <a href="{{ ouserinfo.image.url }}" > <img src="{{ ouserinfo.image.url }}"></a>
               {% else %}
                      <img src="{% static 'Blog/img/default.png' %}" >
 
