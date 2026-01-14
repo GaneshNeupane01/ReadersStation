@@ -2,6 +2,7 @@ from django.db import models
 
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 
 
@@ -20,7 +21,7 @@ class UserDetails(models.Model):
     badge = models.CharField(max_length=10, default="bronze")
     nickname = models.CharField(max_length=50)
     about = models.CharField(max_length=300, default="your description is empty,go to edit profile to add")
-    image = models.ImageField(upload_to='Blog/profile_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='Blog/profile_images/', null=True, blank=True,storage=MediaCloudinaryStorage())
     GENDER_CHOICES = [
         ('Male', 'Male'),
         ('Female', 'Female'),
@@ -69,7 +70,7 @@ class UserPosts(models.Model):
     category = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
     content = models.TextField()
-    image = models.ImageField(upload_to='Blog/post_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='Blog/post_images/', null=True, blank=True,storage=MediaCloudinaryStorage())
     post_time = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     author_details = models.ForeignKey(UserDetails, on_delete=models.SET_NULL, null=True, blank=True)
