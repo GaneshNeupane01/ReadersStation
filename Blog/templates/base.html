@@ -512,7 +512,7 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
     <div class="cardp">
         <div class="card__headerp">
             {% if post.image %}
-            <img src="/media/{{ post.image.url }}"  class="card__image" width="600">
+            <img src="{{ post.image.url }}"  class="card__image" width="600">
             {% else %}
             <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card__image" width="600">
             {% endif %}
@@ -592,7 +592,7 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
             <div class="userp">
                 <a href="{% url 'userprofile' post.author.id %}">
                     {% if post.author_details.image %}
-                    <img src="/media/{{ post.author_details.image }}" alt="user__image" class="user__imagep">
+                    <img src="{{ post.author_details.image.url }}" alt="user__image" class="user__imagep">
                     {% else %}
                     <img src="{% static 'Blog/img/default.png' %}" class="user__imagep">
                     {% endif %}
@@ -1375,7 +1375,7 @@ top:50px;
 
     <a href="{% url 'profile' %}" class="nav__link ">
         {% if userinfo.image %}
-    <img src="/media/{{ userinfo.image }}" style="width:35px;height:35px;border-radius:50%;margin-top:-4px;border:1px solid blue;">
+    <img src="{{ userinfo.image.url }}" style="width:35px;height:35px;border-radius:50%;margin-top:-4px;border:1px solid blue;">
 {% else %}
         <img  src="{% static 'Blog/img/default.png' %}" style="width:35px;height:35px;border-radius:50%;margin-top:-4px;border:1px solid blue;">
         {% endif %}
