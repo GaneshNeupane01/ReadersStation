@@ -255,7 +255,7 @@ float:right;
     <div class="cardp">
         <div class="card__headerp">
              {% if post.image %}
-            <img src="/media/{{ post.image }}" alt="card__image" class="card__image" width="600">
+            <img src="{{ post.image.url }}" alt="card__image" class="card__image" width="600">
 {% else %}
             <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card__image" width="600">
             {% endif %}
@@ -318,7 +318,7 @@ float:right;
             <div class="userp">
                 <a href="{% url 'userprofile' post.author.id %}">
                    {% if post.author_details.image %}
-                    <img src="/media/{{ post.author_details.image }}" alt="user__image" class="user__imagep">
+                    <img src="{{ post.author_details.image.url }}" alt="user__image" class="user__imagep">
                       {% else %}
                     <img src="{% static 'Blog/img/default.png' %}"  alt="user__image" class="user__imagep">
                     {% endif %}</a>
@@ -363,7 +363,7 @@ float:right;
  <div class="cardp">
         <div class="card__headerp">
              {% if post.image %}
-            <img src="/media/{{ post.image }}" alt="card__image" class="card__image" width="600">
+            <img src="{{ post.image.url }}" alt="card__image" class="card__image" width="600">
 {% else %}
             <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card__image" width="600">
             {% endif %}
@@ -425,7 +425,7 @@ float:right;
             <div class="userp">
                 <a href="{% url 'userprofile' post.author.id %}">
                     {% if post.author_details.image %}
-                    <img src="/media/{{ post.author_details.image }}" alt="user__image" class="user__imagep">
+                    <img src="{{ post.author_details.image.url }}" alt="user__image" class="user__imagep">
                       {% else %}
                     <img src="{% static 'Blog/img/default.png' %}"  alt="user__image" class="user__imagep">
                     {% endif %}</a>
@@ -472,7 +472,7 @@ float:right;
    <div class="cardp">
         <div class="card__headerp">
               {% if post.image %}
-            <img src="/media/{{ post.image }}" alt="card__image" class="card__image" width="600">
+            <img src="{{ post.image.url }}" alt="card__image" class="card__image" width="600">
 {% else %}
             <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card__image" width="600">
             {% endif %}
@@ -534,7 +534,7 @@ float:right;
             <div class="userp">
                 <a href="{% url 'userprofile' post.author.id %}">
                     {% if post.author_details.image %}
-                    <img src="/media/{{ post.author_details.image }}" alt="user__image" class="user__imagep">
+                    <img src="{{ post.author_details.image.url }}" alt="user__image" class="user__imagep">
                       {% else %}
                     <img src="{% static 'Blog/img/default.png' %}"  alt="user__image" class="user__imagep">
                     {% endif %}</a>
