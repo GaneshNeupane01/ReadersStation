@@ -5,10 +5,10 @@ FROM python:3.10-slim
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Set working directory
+# Working directory
 WORKDIR /app
 
-# Install system dependencies (for Pillow, SQLite, etc.)
+# Install system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential \
@@ -25,7 +25,7 @@ RUN apt-get update && \
         curl \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install
+# Install Python dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
@@ -33,12 +33,10 @@ RUN pip install -r requirements.txt
 # Copy project code
 COPY . .
 
-# Collect static files & run migrations during build
-RUN python manage.py migrate --noinput
-RUN python manage.py collectstatic --noinput
-
 # Expose port
 EXPOSE 8000
 
-# Start the app
-CMD ["gunicorn", "readersstation.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Run migrations, collectstatic, then start server
+CMD python manage.py migrate --noinput && \
+    python manage.py collectstatic --noinput && \
+    gunicorn your_project_name.wsgi:application --bind 0.0.0.0:8000
