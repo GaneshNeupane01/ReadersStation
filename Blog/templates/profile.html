@@ -54,7 +54,7 @@
                 <div class="profile-image">
  {% if userinfo.image %}
 
-                  <a href="/media/{{ userinfo.image }}" > <img src="/media/{{ userinfo.image }}" alt="User Profile Image" id="pimg"></a>
+                  <a href="{{ userinfo.image.url }}" > <img src="{{ userinfo.image.url }}" alt="User Profile Image" id="pimg"></a>
 
               {% else %}
                     <img src="{% static 'Blog/img/default.png' %}" >
@@ -581,7 +581,7 @@ document.querySelectorAll('.share-button').forEach(shareButton => {
         <div class="card__headerp">
             <button class="edit"><a href="{% url 'editpost' post.pk %}">Edit</a></button>
              {% if post.image %}
-            <img src="/media/{{ post.image }}"  class="card__image" width="600">
+            <img src="{{ post.image.url }}"  class="card__image" width="600">
             {% else %}
             <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card__image" width="600">
             {% endif %}
@@ -647,7 +647,7 @@ document.querySelectorAll('.share-button').forEach(shareButton => {
             <div class="userp">
                 <a href="{% url 'userprofile' post.author.id %}">
                     {% if post.author_details.image %}
-                    <img src="/media/{{ post.author_details.image }}" alt="user__image" class="user__imagep">
+                    <img src="{{ post.author_details.image.url }}" alt="user__image" class="user__imagep">
                       {% else %}
                     <img src="{% static 'Blog/img/default.png' %}"  alt="user__image" class="user__imagep">
                     {% endif %}
