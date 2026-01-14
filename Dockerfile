@@ -39,4 +39,4 @@ EXPOSE 8000
 # Run migrations, collectstatic, then start server
 CMD python manage.py migrate --noinput && \
     python manage.py collectstatic --noinput && \
-    gunicorn your_project_name.wsgi:application --bind 0.0.0.0:8000
+    gunicorn readersstation.wsgi:application --bind 0.0.0.0:8000
