@@ -58,7 +58,7 @@
 
                 <div class="post">
                      {% if post.image %}
-            <img src="/media/{{ post.image }}" class="card-img-top" alt="image">
+            <img src="{{ post.image.url }}" class="card-img-top" alt="image">
 {% else %}
             <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card-img-top" >
             {% endif %}
@@ -98,7 +98,7 @@
 
          <a href="{% url 'userprofile' cmt.userinfo.user.id %}">
              {% if cmt.userinfo.image %}
-                    <img src="/media/{{ cmt.userinfo.image }}" alt="user__image" class="user__imagep">
+                    <img src="{{ cmt.userinfo.image.url }}" alt="user__image" class="user__imagep">
         {% else %}
         <img src="{% static 'Blog/img/default.png' %}"  alt="user__image" class="user__imagep">
         {% endif %}</a>
