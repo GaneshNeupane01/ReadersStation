@@ -32,7 +32,7 @@ SESSION_COOKIE_AGE = 1209600  # Set the session cookie age to two weeks (in seco
 SECRET_KEY = 'django-insecure-(^l)s@5=p9z*d)(kvqwlt_*5gzwigi&y%!1yub1gap3^$y4@f8'
 
 
-DEBUG = 'RENDER' not in os.environ
+DEBUG = False
 ALLOWED_HOSTS = os.environ.get('RENDER_EXTERNAL_HOSTNAME', '').split(',')
 
 
@@ -104,12 +104,23 @@ WSGI_APPLICATION = 'readersstation.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
+# DATABASES
+# Use DATABASE_URL if provided (e.g., Postgres), else fallback to SQLite
+DATABASES = {}
+
+if os.environ.get('DATABASE_URL'):
+    # For production with DATABASE_URL (like Postgres)
+    DATABASES['default'] = dj_database_url.config(
         conn_max_age=600,
         ssl_require=True
     )
-}
+else:
+    # Default to SQLite for local/dev/Render free tier
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+
 
 
 # Password validation
