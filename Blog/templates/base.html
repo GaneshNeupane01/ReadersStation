@@ -512,7 +512,7 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
     <div class="cardp">
         <div class="card__headerp">
             {% if post.image %}
-            <img src="/media/{{ post.image }}"  class="card__image" width="600">
+            <img src="/media/{{ post.image.url }}"  class="card__image" width="600">
             {% else %}
             <img src="{% static 'Blog/img/defaultpost.jpg' %}"  class="card__image" width="600">
             {% endif %}
