@@ -6,6 +6,8 @@
 
 **GitHub Repository:** [https://github.com/GaneshNeupane01/ReadersStation.git]()
 
+![Quick Glance of Adding Post](static/img/4.jpg)
+
 ---
 
 ## Features
